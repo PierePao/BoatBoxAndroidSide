@@ -16,6 +16,7 @@ This React Native application tracks SMS messages, extracts location data from t
   - [Using an Emulator](#using-an-emulator)
   - [Using a Physical Device](#using-a-physical-device)
 - [Debugging and Logging](#debugging-and-logging)
+- [Environment Diagnostics](#environment-diagnostics)
 
 ## Prerequisites
 
@@ -123,3 +124,13 @@ To view real-time logs from the application, including logs from the native Andr
     npx react-native log-android
     ```
 This will stream logs from the device, which is useful for debugging SMS reception, message parsing, and other native functionalities.
+
+## Environment Diagnostics
+
+If you encounter issues with your setup, you can use the `doctor` command to check the status of all required components. This command helps verify that Node.js, the JDK, Android Studio, SDKs, and other dependencies are correctly installed and configured.
+
+To run the diagnostics, execute the following command in the project's root directory:
+```shell
+npx react-native doctor
+```
+Follow any instructions provided by the doctor to resolve potential issues.
