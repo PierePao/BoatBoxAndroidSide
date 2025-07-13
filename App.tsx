@@ -5,24 +5,26 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import TrackingScreen from './src/screens/TrackingScreen';
+import MapScreen from './src/screens/MapScreen';
+import { LocationProvider } from './src/context/LocationContext';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const Tab = createBottomTabNavigator();
 
+function App(): React.JSX.Element {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <LocationProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Tracking" component={TrackingScreen} />
+          <Tab.Screen name="Map" component={MapScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </LocationProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
