@@ -3,10 +3,14 @@
 import './Dashboard.css';
 import OpenStreetMapContainer from './OpenStreetMapContainer';
 
+
+
+
 const mockMessages = [
-  { time: '2025-07-13 22:00', location: '14.5995° N, 120.9842° E', status: 'OK' },
-  { time: '2025-07-13 21:55', location: '14.5990° N, 120.9840° E', status: 'OK' },
-  { time: '2025-07-13 21:50', location: '14.5985° N, 120.9838° E', status: 'OK' },
+  { boatBoxId: 'BBX-002', time: '2025-07-13 21:45', location: '14.6000° N, 120.9850° E', status: 'OK' },
+  { boatBoxId: 'BBX-001', time: '2025-07-13 22:00', location: '14.5995° N, 120.9842° E', status: 'OK' },
+  { boatBoxId: 'BBX-001', time: '2025-07-13 21:55', location: '14.5990° N, 120.9840° E', status: 'OK' },
+  { boatBoxId: 'BBX-001', time: '2025-07-13 21:50', location: '14.5985° N, 120.9838° E', status: 'OK' },
 ];
 
 
@@ -14,7 +18,7 @@ const mockMessages = [
 export default function Dashboard() {
   return (
     <div className="dashboard-layout" style={{ background: 'linear-gradient(135deg, #0a2342 0%, #19376d 100%)', height: '100vh', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
-      <aside className="sidebar" style={{ background: 'linear-gradient(180deg, #19376d 0%, #0a2342 100%)', color: '#fff', minWidth: '260px', maxWidth: '320px', width: '20vw', display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+      <aside className="sidebar" style={{ background: 'linear-gradient(180deg, #19376d 0%, #0a2342 100%)', color: '#fff', minWidth: '160px', maxWidth: '200px', width: '10vw', display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
         <div className="sidebar-header" style={{ fontWeight: 'bold', fontSize: '1.7rem', color: '#fff', letterSpacing: '2px' }}>
           BoatBox
           <div style={{ fontWeight: 'normal', fontSize: '1rem', color: '#b3b8e0', marginTop: '0.2rem' }}>Municipality of What the Helly</div>
@@ -32,12 +36,12 @@ export default function Dashboard() {
           <button style={{ background: '#0a2342', color: '#fff', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1rem', fontWeight: 'bold', cursor: 'pointer' }}>Log Out</button>
         </div>
       </aside>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'row', minWidth: 0, height: '100vh', overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
-        <main className="main-content" style={{ background: '#fff', borderRadius: '1.5rem', margin: '0.5rem 1rem 2rem 2rem', padding: '2rem', boxShadow: '0 2px 16px #0001', flex: 1, overflow: 'auto', maxHeight: '800px', minHeight: '600px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', maxWidth: '700px', minWidth: '350px' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'row', minWidth: 0, height: '100vh', overflow: 'hidden', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
+        <main className="main-content" style={{ background: '#fff', borderRadius: '1.5rem', margin: '0 0 0 2rem', padding: '2rem', boxShadow: '0 2px 16px #0001', flex: '0 1 950px', overflow: 'auto', maxHeight: '800px', minHeight: '600px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', maxWidth: '950px', minWidth: '350px', alignSelf: 'center' }}>
 
           {/* ...existing dashboard content... */}
           <header className="main-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(25,55,109,0.95)', color: '#fff', borderRadius: '1rem', padding: '1.2rem 2rem', margin: '0 0 1.5rem 0', boxShadow: '0 2px 8px #0002', minHeight: '70px' }}>
-            <h1 style={{ margin: 0, color: '#fff' }}>BoatBox </h1>
+            <h1 style={{ margin: 0, color: '#fff' }}>Boat Box </h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <input className="search-bar" placeholder="Search..." style={{ borderRadius: '0.5rem', border: '1px solid #25406d', padding: '0.5rem 1rem', fontSize: '1rem', outline: 'none', background: '#e0e7ef', color: '#25406d' }} />
               <div className="user-info" style={{ background: '#0a2342', color: '#fff', borderRadius: '0.5rem', padding: '0.5rem 1rem', fontWeight: 'bold' }}>Seafarer</div>
@@ -65,6 +69,7 @@ export default function Dashboard() {
             <table className="messages-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
+                  <th style={{ color: '#19376d', textAlign: 'left', padding: '0.5rem' }}>BoatBox ID</th>
                   <th style={{ color: '#19376d', textAlign: 'left', padding: '0.5rem' }}>Time</th>
                   <th style={{ color: '#19376d', textAlign: 'left', padding: '0.5rem' }}>Location</th>
                   <th style={{ color: '#19376d', textAlign: 'left', padding: '0.5rem' }}>Status</th>
@@ -73,9 +78,10 @@ export default function Dashboard() {
               <tbody>
                 {mockMessages.map((msg, idx) => (
                   <tr key={idx}>
+                    <td style={{ padding: '0.5rem', color: '#19376d' }}>{msg.boatBoxId}</td>
                     <td style={{ padding: '0.5rem', color: '#19376d' }}>{msg.time}</td>
                     <td style={{ padding: '0.5rem', color: '#19376d' }}>{msg.location}</td>
-                    <td style={{ padding: '0.5rem', color: msg.status === 'OK' ? '#25406d' : '#19376d', fontWeight: 'bold' }}>{msg.status}</td>
+                    <td style={{ padding: '0.5rem', color: msg.status === 'OK' ? '#27ae60' : '#e74c3c', fontWeight: 'bold' }}>{msg.status}</td>
                   </tr>
                 ))}
               </tbody>
